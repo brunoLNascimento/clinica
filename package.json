@@ -1,0 +1,28 @@
+{
+  "name": "afyaclinica",
+  "version": "1.0.0",
+  "description": "```sh\r $ docker-compose up\r ```",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "consign": "^0.1.6",
+    "email-validator": "^2.0.4",
+    "eslint": "^9.11.1",
+    "express": "^4.16.4",
+    "express-load": "1.1.15",
+    "express-session": "1.11.3",
+    "jsonwebtoken": "^5.7.0",
+    "md5": "^2.2.1",
+    "moment": "^2.24.0",
+    "mysql2": "^1.7.0",
+    "restler": "3.4.0",
+    "restler-q": "0.1.1",
+    "sequelize": "^5.21.1"
+  }
+}
