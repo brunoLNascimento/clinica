@@ -1,8 +1,8 @@
-const env = require('./config');
+const config = require('./config');
 
 const Sequelize = require('sequelize')
-  , sequelize = new Sequelize(env.mysql.database, env.mysql.user, env.mysql.password, {
-	host: env.mysql.host,
+  , sequelize = new Sequelize(config.mysql.database, config.mysql.user, config.mysql.password, {
+	host: config.mysql.host,
 	dialect: "mysql",
     log: console.log
 });

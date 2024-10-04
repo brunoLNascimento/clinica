@@ -1,15 +1,15 @@
 const Sequelize = require('sequelize')
 , sequelize = require('../config/sequelize');
 
-const User = sequelize.define( 'User', 
+const user = sequelize.define( 'user', 
   {
-    id: { type: DataTypes.NUMBER, primary: true, generated: true },
-    name: { type: String, length: 255, allowNull: false },
-    login: { type: String, length: 20, allowNull: false, unique: true },
-    password: { type: String, allowNull: false },
+    id: { type: Sequelize.NUMBER, primaryKey: true, allowNull: false, autoIncrement: true },
+    name: { type: Sequelize.STRING, length: 255, allowNull: false },
+    // login: { type: Sequelize.STRING, length: 20, allowNull: false, unique: true },
+    // password: { type: Sequelize.STRING, allowNull: false },
   },{
     freezeTableName:true, 
     timestamps:false
   });
 
-exports.getUser = function() { return User }
+exports.getUser = function() { return user }

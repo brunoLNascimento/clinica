@@ -1,8 +1,12 @@
 module.exports = {
     mysql: {
-        host: 'localhost',
-        database: 'afyaClinica',
-        user: 'root',
-        password: 'root'
+        host: 'rds-mysql-hmg.sinopticoplus.com',
+        database: 'testee',
+        user: 'frota',
+        password: 'frota'
     },
+
+    limit: {
+        pag: 15
+    }
 };
