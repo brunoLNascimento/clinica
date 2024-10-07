@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize')
 , sequelize = require('../config/sequelize');
 
-const clientHistory = sequelize.define( 'ClientHistory',
+const clientHistory = sequelize.define( 
+  'clientHistory',
   {
     id: { type: Sequelize.NUMBER, primaryKey: true, allowNull: false, autoIncrement: true },
     clientId: { type: Sequelize.NUMBER, allowNull: false},

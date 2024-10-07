@@ -1,9 +1,10 @@
 const Sequelize = require('sequelize')
 , sequelize = require('../config/sequelize');
 
-const client = sequelize.define('client', 
+const client = sequelize.define(
+  'client', 
   {
-    id: { type: Sequelize.NUMBER, primaryKey: true, allowNull: false, autoIncrement: true },
+    clientid: { type: Sequelize.NUMBER, primaryKey: true, allowNull: false, autoIncrement: true },
     name: { type: Sequelize.STRING, length: 255, allowNull: false },
     gender: { type: Sequelize.STRING, length: 1, allowNull: false },
     phone: { type: Sequelize.STRING, length: 14, allowNull: false },
@@ -15,4 +16,4 @@ const client = sequelize.define('client',
     timestamps:false
   });
 
-  exports.getClient = function() { return client }
+exports.getClient = function() { return client }

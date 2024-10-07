@@ -6,7 +6,7 @@ module.exports = {
             let where =  { id: id };
             return await findUserById(where);
         } catch (error) {
-            return error;
+            throw error;;
         }
     },
 
@@ -15,7 +15,7 @@ module.exports = {
             pag = parseInt(pag);
             return await findAllUser(pag);
         } catch (error) {
-            return error;
+            throw error;;
         }
     },
 
@@ -33,7 +33,7 @@ module.exports = {
 
             return await saveUser(where);
         } catch (error) {
-            return error;
+            throw error;;
         }
     }
 }

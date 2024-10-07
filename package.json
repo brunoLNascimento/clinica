@@ -24,6 +24,6 @@
     "mysql2": "^1.7.0",
     "restler": "3.4.0",
     "restler-q": "0.1.1",
-    "sequelize": "^5.21.1"
+    "sequelize": "^6.11.0"
   }
 }

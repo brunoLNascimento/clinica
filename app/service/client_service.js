@@ -14,7 +14,7 @@ module.exports = {
 
             return await saveClient(where);
         } catch (error) {
-            return error;
+            throw error;;
         }
     },
 
@@ -24,7 +24,7 @@ module.exports = {
             let resp = await findClientById(where);
             return resp
         } catch (error) {
-            return error;
+            throw error;;
         }
     },
 
@@ -34,7 +34,7 @@ module.exports = {
             let resp = await findAllClient(pag);
             return resp
         } catch (error) {
-            return error;
+            throw error;;
         }
     },
 }
