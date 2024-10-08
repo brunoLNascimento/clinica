@@ -2,7 +2,6 @@ const { StatusCodes } = require("http-status-codes");
 const { findUser, saveUser , findAllUser } = require("../service/user_service");
 
 module.exports = {
-
     async saveUser(req, res){
         try {
             let { name, gender, phone, birth, height, weight } = req.body;

@@ -2,7 +2,6 @@ const { StatusCodes } = require("http-status-codes");
 const { saveClientService, findClientService, findAllClientService } = require("../service/client_service");
 
 module.exports = {
-
     async saveClient(req, res){
         try {
             let { name, gender, phone, birth, height, weight } = req.body;
@@ -29,6 +28,7 @@ module.exports = {
             return res.status(400).send(error.message || error);
         }
     },
+
     async findAllClient(req, res){
         try {
             let pag = req.params.pag;

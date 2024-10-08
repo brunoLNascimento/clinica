@@ -19,7 +19,6 @@ module.exports = {
         }
     },
 
-
     async saveUser(name, gender, phone, birth, height, weight){
         try {
             let where = {

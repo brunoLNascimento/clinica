@@ -2,7 +2,6 @@ const { StatusCodes } = require("http-status-codes");
 const { saveClientHistoryService, findHistory, findAll } = require("../service/clientHistory_service");
 
 module.exports = {
-
     async saveClientH(req, res){
         try {
             let { clientId, date, description } = req.body;
@@ -18,6 +17,7 @@ module.exports = {
             return res.status(400).send(error.message || error);
         }
     },
+
     async findOneHistory(req, res){
         try {
             let id = req.params.id;
