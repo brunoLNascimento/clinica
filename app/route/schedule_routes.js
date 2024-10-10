@@ -5,4 +5,5 @@ module.exports = (server) => {
     server.get('/findSchedule/:id', schedule.findSchedule);
     server.get('/allSchedule/:pag', schedule.findAllSchedule);
     server.delete('/schedule/:id', schedule.deleteSchedule);
+    server.put('/schedule/:id', schedule.editSchedule);
 }
