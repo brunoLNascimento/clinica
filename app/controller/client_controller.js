@@ -1,5 +1,6 @@
+//const { validationResult } = require('express-validator');
 const { StatusCodes } = require("http-status-codes");
-const { saveClientService, findClientService, findAllClientService } = require("../service/client_service");
+const { saveClientService, findClientService, findAllClientService, editClientService } = require("../service/client_service");
 
 module.exports = {
     async saveClient(req, res){
@@ -33,6 +34,16 @@ module.exports = {
         try {
             let pag = req.params.pag;
             let resp = await findAllClientService(pag);
+            return  res.status(200).send(resp)
+        } catch (error) {
+            console.log(error);
+            return res.status(400).send(error.message || error);
+        }
+    },
+
+    async editClient(req, res){
+        try {
+            let resp = await editClientService(req.params.id, req.body);
             return  res.status(200).send(resp)
         } catch (error) {
             console.log(error);

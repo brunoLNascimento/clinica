@@ -1,5 +1,5 @@
-const { findAllScheduleRepository, saveScheduleRepository, findScheduleByIdRepository, deleteScheduleRepository, findScheduleRepository } = require("../repository/schedule_repository");
-const { dateformat, timeFormat, dateNowFormat, addMinuteFormat } = require("../helper/date");
+const { findAllScheduleRepository, saveScheduleRepository, findScheduleByIdRepository, deleteScheduleRepository, findScheduleRepository, updateScheduleRepository, findScheduleById } = require("../repository/schedule_repository");
+const { dateformat, timeFormat, dateNowFormat, addMinuteFormat, subMinuteFormat } = require("../helper/date");
 
 module.exports = {
     async saveScheduleService(daySchedule, timeSchedule, clientId, status){
@@ -7,8 +7,9 @@ module.exports = {
             let day = dateformat(daySchedule);
             let time = timeFormat(timeSchedule);
             let addMinutes = addMinuteFormat(time);
+            let subMinutes = subMinuteFormat(time);
 
-            let [ found ] = await findScheduleRepository(day, time, addMinutes);
+            let [ found ] = await findScheduleRepository(day, time, addMinutes, subMinutes, subMinutes);
             if(found) throw "Já existe um agendamento para esse horário.";
 
             let build = {
@@ -27,8 +28,7 @@ module.exports = {
 
     async findScheduleService(id){
         try {
-            let resp = await findScheduleByIdRepository(id);
-            return resp
+            return await findScheduleByIdRepository(id);
         } catch (error) {
             throw error;
         }
@@ -36,9 +36,7 @@ module.exports = {
 
     async findAllScheduleService(pag){
         try {
-            pag = parseInt(pag);
-            let resp = await findAllScheduleRepository(pag);
-            return resp
+            return await findAllScheduleRepository(parseInt(pag));
         } catch (error) {
             throw error;;
         }
@@ -46,10 +44,30 @@ module.exports = {
 
     async deleteScheduleService(id){
         try {
-            let resp = await deleteScheduleRepository(id);
-            return resp
+           return await deleteScheduleRepository(parseInt(id));
         } catch (error) {
             throw error;
         }
     },
+
+    async updateScheduleService(id, body){
+        try {            
+            let found = await findScheduleById(id);
+            if(!found) throw "Nenhum schedule encontrado!";
+
+            let build = {
+                daySchedule: dateformat(body.daySchedule) ? dateformat(body.daySchedule) : body.daySchedule,
+                timeSchedule: timeFormat(body.timeSchedule) ? timeFormat(body.timeSchedule) : body.timeSchedule,
+                clientId: body.clientId,
+                status: body.status
+            };
+
+            let saved = await updateScheduleRepository(build, id);
+            
+            if(!saved[0]) return "Nenhum dado foi atualizado!";
+            else return "Dados atualizados com sucesso!"
+        } catch (error) {
+            throw error;
+        }
+    }
 }

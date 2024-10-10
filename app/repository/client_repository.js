@@ -7,15 +7,15 @@ module.exports = {
         try {
             return await getClient().create(build);
         } catch (error) {
-            return console.log(error);
+            throw error;
         }
     },
 
     async findClientById(where){
         try {
-            return await getClient().findOne(where);
+            return await getClient().findOne({where});
         } catch (error) {
-            return console.log(error);
+            throw error;
         }
     },
 
@@ -24,8 +24,20 @@ module.exports = {
             let skip = pag * limit.pag;
             return await getClient().findAll({ limit: [(skip), limit.pag] });
         } catch (error) {
-            return console.log(error);
+            throw error;
+        }
+    },
+
+    async updateClient(build, id){
+        try {
+            return await getClient().update(
+                build,
+                {
+                    where: { clientId: id }
+                }
+            );
+        } catch (error) {
+            throw error;
         }
     }
-    
 }

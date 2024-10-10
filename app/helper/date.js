@@ -13,16 +13,18 @@ module.exports = {
     },
     
     dateformat(time){
-        //return moment(time, Format.YMD)
-        return moment(new Date(time)).format(Format.YMD);
+        return moment(time).format(Format.YMD);
     },
 
     timeFormat(time){
         return moment(time, 'h:mm a').format(Format.HHMMSS);
-       
     },
 
     addMinuteFormat(time){
         return moment(time, 'h:mm a').add(Format.ADD, 'minutes').format(Format.HHMMSS);
+    },
+
+    subMinuteFormat(time){
+        return moment(time, 'h:mm a').subtract(Format.ADD, 'minutes').format(Format.HHMMSS);
     },
 };
