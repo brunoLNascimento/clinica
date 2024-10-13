@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { saveClientService, findClientService, findAllClientService, editClientService } = require("../service/client_service");
+const { saveClientService, findClientService, findAllClientService, editClientService, deleteClientService } = require("../service/client_service");
 
 module.exports = {
     async saveClient(req, res){
@@ -49,5 +49,19 @@ module.exports = {
             return res.status(400).send(error.message || error);
         }
     },
-    
+
+    async deleteClient(req, res){
+        try {
+            let id = req.params.id;
+            let resp = await deleteClientService(id);
+            if(resp){
+                return res.status(200).send("Deletado com sucesso!");
+            }else{
+                throw "Não encontrou dado a ser deletado!";
+            }
+        } catch (error){
+            console.log(error);
+            return res.status(400).send(error.message || error);
+        }
+    },
 }

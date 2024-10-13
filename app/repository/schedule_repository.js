@@ -9,7 +9,7 @@ const Sequelize = require('sequelize')
 });
   
 module.exports = {
-    async saveScheduleRepository(build){
+    async saveSchedule(build){
         try {
             return await schedule().create(build);
         } catch (error) {
@@ -17,29 +17,15 @@ module.exports = {
         }
     },
 
-    async findScheduleByIdRepository(id){
+    async findScheduleBy(where){
         try {
-            return await sequelize.query(
-                `SELECT c.clientId, c.name, c.phone, c.birth, s.daySchedule, s.timeSchedule, s.status `+
-                `from client c, schedule s where s.id = ${id} and s.clientId = c.clientId`,
-                { type: sequelize.QueryTypes.SELECT }
-            )
-        } catch (error) {
-            console.log(error);
+            return await schedule().find(where)
+        } catch (error) {           
             throw error
         }
     },
 
-    async findScheduleById(id){
-        try {
-            return await schedule().find({where: { id: id }});
-        } catch (error) {
-            console.log(error);
-            throw error
-        }
-    },
-
-    async findAllScheduleRepository(pag){  
+    async findAllSchedule(pag){  
         try {
             let skip = pag * limit.pag;
             return await schedule().findAll(
@@ -52,7 +38,7 @@ module.exports = {
         }
     },
 
-    async findScheduleRepository(day, time, addMinutes, subMinutes){  
+    async findSchedule(day, time, addMinutes, subMinutes){  
         try {
             return await sequelize.query(                
                 `SELECT * FROM schedule WHERE daySchedule = '${day}' AND timeSchedule = '${time}' ` +
@@ -64,16 +50,15 @@ module.exports = {
         }
     },
 
-    async deleteScheduleRepository(id){
+    async deleteSchedule(id){
         try {
             return await schedule().destroy({ where: { id: id }});
-        } catch (error) {
-            console.log(error);
+        } catch (error) {           
             throw error
         }
     },
 
-    async updateScheduleRepository(build, id){
+    async updateSchedule(build, id){
         try {
             return await schedule().update(
                 build,

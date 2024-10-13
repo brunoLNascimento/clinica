@@ -1,10 +1,14 @@
-const { saveClient, findClientById, findAllClient, updateClient } = require("../repository/client_repository");
+const { saveClient, findClientBy, findAllClient, updateClient, deleteClientRepository  } = require("../repository/client_repository");
 const { dateformat } = require('../helper/date')
 
 module.exports = {
-    async saveClientService(name, gender, phone, birth, height, weight){
+    async saveClientService(name, gender, phone, birth, height, weight, cpf){
         try {
-            let where = {
+            let where = { cpf: cpf };
+            let found = await findClientBy({where});
+            
+            if(found) throw "Já existe usuário com esses parâmetros"
+            let build = {
                 name: name,
                 gender: gender,
                 phone: phone,
@@ -13,7 +17,7 @@ module.exports = {
                 weight: weight
             };
 
-            return await saveClient(where);
+            return await saveClient(build);
         } catch (error) {
             throw error;;
         }
@@ -22,7 +26,7 @@ module.exports = {
     async findClientService(id){
         try {
             let where = { clientId: id };
-            let resp = await findClientById(where);
+            let resp = await findClientBy(where);
             return resp
         } catch (error) {
             throw error;;
@@ -31,8 +35,7 @@ module.exports = {
 
     async findAllClientService(pag){
         try {
-            pag = parseInt(pag);
-            let resp = await findAllClient(pag);
+            let resp = await findAllClient(parseInt(pag));
             return resp
         } catch (error) {
             throw error;;
@@ -61,4 +64,12 @@ module.exports = {
             throw error;;
         }
     },
+
+    async deleteClientService(id){
+        try {
+           return await deleteClientRepository(parseInt(id));
+        } catch (error) {
+            throw error;
+        }
+    }
 }

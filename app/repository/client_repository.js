@@ -11,7 +11,7 @@ module.exports = {
         }
     },
 
-    async findClientById(where){
+    async findClientBy(where){
         try {
             return await getClient().findOne({where});
         } catch (error) {
@@ -38,6 +38,15 @@ module.exports = {
             );
         } catch (error) {
             throw error;
+        }
+    },
+
+    async deleteClient(id){
+        try {
+            return await getClient().destroy({ where: { id: id }});
+        } catch (error) {
+            console.log(error);
+            throw error
         }
     }
 }

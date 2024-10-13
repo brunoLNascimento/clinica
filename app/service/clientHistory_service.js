@@ -26,8 +26,7 @@ module.exports = {
 
     async findAll(pag){
         try {
-            pag = parseInt(pag);
-            let resp = await findAllHistory(pag);
+            let resp = await findAllHistory(parseInt(pag));
             return resp
         } catch (error) {
             throw error;;

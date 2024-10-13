@@ -1,4 +1,4 @@
-const { findAllScheduleRepository, saveScheduleRepository, findScheduleByIdRepository, deleteScheduleRepository, findScheduleRepository, updateScheduleRepository, findScheduleById } = require("../repository/schedule_repository");
+const { findAllSchedule, saveSchedule, deleteSchedule, findSchedule, updateSchedule, findScheduleBy } = require("../repository/schedule_repository");
 const { dateformat, timeFormat, dateNowFormat, addMinuteFormat, subMinuteFormat } = require("../helper/date");
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
             let addMinutes = addMinuteFormat(time);
             let subMinutes = subMinuteFormat(time);
 
-            let [ found ] = await findScheduleRepository(day, time, addMinutes, subMinutes, subMinutes);
+            let [ found ] = await findSchedule(day, time, addMinutes, subMinutes, subMinutes);
             if(found) throw "Já existe um agendamento para esse horário.";
 
             let build = {
@@ -20,7 +20,7 @@ module.exports = {
                 dateCreated: dateNowFormat()
             };
 
-            return await saveScheduleRepository(build);
+            return await saveSchedule(build);
         } catch (error) {
             throw error;;
         }
@@ -28,7 +28,8 @@ module.exports = {
 
     async findScheduleService(id){
         try {
-            return await findScheduleByIdRepository(id);
+            let where =  { id: id };
+            return await findScheduleBy(where);
         } catch (error) {
             throw error;
         }
@@ -36,7 +37,7 @@ module.exports = {
 
     async findAllScheduleService(pag){
         try {
-            return await findAllScheduleRepository(parseInt(pag));
+            return await findAllSchedule(parseInt(pag));
         } catch (error) {
             throw error;;
         }
@@ -44,7 +45,7 @@ module.exports = {
 
     async deleteScheduleService(id){
         try {
-           return await deleteScheduleRepository(parseInt(id));
+           return await deleteSchedule(parseInt(id));
         } catch (error) {
             throw error;
         }
@@ -52,7 +53,8 @@ module.exports = {
 
     async updateScheduleService(id, body){
         try {            
-            let found = await findScheduleById(id);
+            let where =  { id: id };
+            let found = await findScheduleBy(where);
             if(!found) throw "Nenhum schedule encontrado!";
 
             let build = {
@@ -62,7 +64,7 @@ module.exports = {
                 status: body.status
             };
 
-            let saved = await updateScheduleRepository(build, id);
+            let saved = await updateSchedule(build, id);
             
             if(!saved[0]) return "Nenhum dado foi atualizado!";
             else return "Dados atualizados com sucesso!"
