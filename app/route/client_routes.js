@@ -1,7 +1,8 @@
 const client = require('../controller/client_controller.js')
+const authentication = require('../middleware/auth');
 
 module.exports = (server) => {
-    server.post('/client/', client.saveClient,        
+    server.post('/client/', authentication, client.saveClient,        
         /*
         #swagger.tags = ['Client']
         #swagger.summary = 'Cadastro de cliente'

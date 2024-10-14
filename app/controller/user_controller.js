@@ -10,9 +10,9 @@ module.exports = {
                 throw { status: StatusCodes.BAD_REQUEST}
             }
 
-            let resp = await saveUser(name, login, password);
-            return  res.status(200).send(resp)
-        } catch (error) {
+            await saveUser(name, login, password);
+            return res.status(200).send("Usuário salvo com sucesso!");
+            } catch (error) {
             console.log(error);
             return res.status(400).send(error.message || error);
         }

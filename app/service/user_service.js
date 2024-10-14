@@ -1,4 +1,5 @@
 const { findAllUser, findUserBy, saveUser, deleteUser, updateUser } = require("../repository/user_repository");
+const bcrypt = require('../helper/bcrypt');
 
 module.exports = {
     async findUser(id){
@@ -28,7 +29,7 @@ module.exports = {
             let build = {
                 name: name,
                 login: login,
-                password: password
+                password: bcrypt.encrypt(password, 10)
             };
 
             return await saveUser(build);
