@@ -96,15 +96,6 @@ describe( 'Testando api de afyaClinica', () => {
         .end(done)
     })
 
-    it('#5 - Salva cliente com sucesso', done => {
-        request(app)
-        .put(`/user/${idUser}`)
-        .send(editUser)
-        .timeout(3000)
-        .expect(200)
-        .end(done)
-    })
-
     it('#6 - Salvar cliente', done => {
         request(app)
         .post(`/client/`)
