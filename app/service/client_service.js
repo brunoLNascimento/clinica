@@ -1,4 +1,4 @@
-const { saveClient, findClientBy, findAllClient, updateClient, deleteClientRepository  } = require("../repository/client_repository");
+const { saveClient, findClientBy, findAllClient, updateClient, deleteClient  } = require("../repository/client_repository");
 const { dateformat } = require('../helper/date');
 const { cpfFormat, cpfCheck } = require('../helper/util');
 
@@ -50,7 +50,7 @@ module.exports = {
 
     async editClientService(id, body){
         try {            
-            const foundClient = await findClientById( where = { clientId: parseInt(id) } );
+            const foundClient = await findClientBy( where = { clientId: parseInt(id) } );
             if(!foundClient) throw "Nenhum cliente encontrado!";
 
             let build = {
@@ -73,7 +73,7 @@ module.exports = {
 
     async deleteClientService(id){
         try {
-           return await deleteClientRepository(parseInt(id));
+           return await deleteClient(parseInt(id));
         } catch (error) {
             throw error;
         }

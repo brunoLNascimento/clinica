@@ -8,9 +8,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 consign({cwd:'app'})
     .include('model')   
-    .then('worker')
-    .then('controllers')
-    .then('routes')
+    .then('controller')
+    .then('route')
     .then('config')
     .into(app);
 

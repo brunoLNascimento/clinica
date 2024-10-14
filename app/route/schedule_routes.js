@@ -2,7 +2,7 @@ const schedule = require('../controller/schedule_controller.js')
 
 module.exports = (server) => {
     server.post('/schedule/', schedule.saveSchedule,
-                /*
+        /*
         #swagger.tags = ['Schedule']
         #swagger.summary = 'Cadastro de agendamento'
         #swagger.description = 'Cadastro de agendamento de cliente'
@@ -32,6 +32,7 @@ module.exports = (server) => {
         #swagger.description = 'Delete fisico de agendamento de cliente na base de dados'
         */ 
     );
+    
     server.put('/schedule/:id', schedule.editSchedule,
           /*
         #swagger.tags = ['Schedule']

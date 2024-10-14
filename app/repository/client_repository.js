@@ -13,7 +13,7 @@ module.exports = {
 
     async findClientBy(where){
         try {
-            return await getClient().findOne({where});
+            return await getClient().findOne(where);
         } catch (error) {
             throw error;
         }
@@ -43,7 +43,7 @@ module.exports = {
 
     async deleteClient(id){
         try {
-            return await getClient().destroy({ where: { id: id }});
+            return await getClient().destroy({ where: { clientid: id }});
         } catch (error) {
             console.log(error);
             throw error

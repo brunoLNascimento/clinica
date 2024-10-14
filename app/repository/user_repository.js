@@ -6,7 +6,7 @@ module.exports = {
         try {
             return await getUser().findOne(where);
         } catch (error) {
-            return console.log(erro);
+            throw error
         }
     },
 
@@ -15,15 +15,15 @@ module.exports = {
             let skip = pag * limit.pag;
             return await getUser().findAll({ limit: [ (skip), limit.pag ]});
         } catch (error) {
-            return console.log(error);
+            throw error
         }
     },
 
     async saveUser(build){
         try {
-            return await getUser().save(build);
+            return await getUser().create(build);
         } catch (error) {
-            return console.log(error);
+            throw error
         }
     },
 

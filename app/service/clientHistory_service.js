@@ -1,4 +1,4 @@
-const { saveClientHistory, findHistoryById, findAllHistory } = require("../repository/clientHistory_repository");
+const { saveClientHistory, findHistoryById, findAllHistory, deleteHistoryBy } = require("../repository/clientHistory_repository");
 
 module.exports = {
     async saveClientHistoryService(clientId, date, description){
@@ -30,6 +30,14 @@ module.exports = {
             return resp
         } catch (error) {
             throw error;;
+        }
+    },
+
+    async delHistory(id){
+        try {
+           return await deleteHistoryBy(parseInt(id));
+        } catch (error) {
+            throw error;
         }
     },
 }

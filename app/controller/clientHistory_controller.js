@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { saveClientHistoryService, findHistory, findAll } = require("../service/clientHistory_service");
+const { saveClientHistoryService, findHistory, findAll, delHistory } = require("../service/clientHistory_service");
 
 module.exports = {
     async saveClientH(req, res){
@@ -38,6 +38,23 @@ module.exports = {
             console.log(error);
             return res.status(400).send(error.message || error);
         }
-    }
+    },
+
+    async deleteHistory(req, res){
+        try {
+            let id = req.params.id;
+            let resp = await delHistory(id);
+            if(resp){
+                return res.status(200).send("Deletado com sucesso!");
+            }else{
+                throw "Não encontrou dado a ser deletado!";
+            }
+        } catch (error){
+            console.log(error);
+            return res.status(400).send(error.message || error);
+        }
+    },
+
+    
 
 }

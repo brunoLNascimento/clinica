@@ -40,5 +40,14 @@ module.exports = {
         } catch (error) {
            throw error;
         }
-    }
+    },
+
+    async deleteHistoryBy(id){
+        try {
+            return await getClientHistory().destroy({ where: { id: id }});
+        } catch (error) {
+            console.log(error);
+            throw error
+        }
+    },
 }

@@ -25,7 +25,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.put('/user/:id', user.deletUser,
+    server.put('/user/:id', user.updateUser,
         /*
         #swagger.tags = ['User']
         #swagger.summary = 'Edita o usuario'
@@ -33,7 +33,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.delete('/user/:id', user.updateUser,
+    server.delete('/user/:id', user.deletUser,
         /*
         #swagger.tags = ['User']
         #swagger.summary = 'Deleta usuario'

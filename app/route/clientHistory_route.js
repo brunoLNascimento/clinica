@@ -24,4 +24,12 @@ module.exports = (server) => {
         #swagger.description = 'Vai retornar todos os historicos sempre paginando'
         */
     );
+
+    server.delete('/clientHistory/:id', clientH.deleteHistory,
+        /*
+        #swagger.tags = ['User']
+        #swagger.summary = 'Deleta usuario'
+        #swagger.description = 'Exclusao logica do usuario no banco de dados'
+        */ 
+    );
 }
