@@ -1,9 +1,9 @@
 module.exports = {
     mysql: {
-        host: 'rds-mysql-hmg.sinopticoplus.com',
-        database: 'testee',
-        user: 'frota',
-        password: 'frota'
+        host: 'localhost',
+        database: 'afyaclinica',
+        user: 'root',
+        password: 'root'
     },
 
     limit: {
