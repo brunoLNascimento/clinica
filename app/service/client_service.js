@@ -1,15 +1,21 @@
 const { saveClient, findClientBy, findAllClient, updateClient, deleteClientRepository  } = require("../repository/client_repository");
-const { dateformat } = require('../helper/date')
+const { dateformat } = require('../helper/date');
+const { cpfFormat, cpfCheck } = require('../helper/util');
+
 
 module.exports = {
     async saveClientService(name, gender, phone, birth, height, weight, cpf){
         try {
-            let where = { cpf: cpf };
+            let checkCpf = cpfCheck(cpf);
+            if(!checkCpf) throw "CPF deve conter 11 caracteres!";
+
+            let where = { cpf: cpfFormat(cpf) };
             let found = await findClientBy({where});
             
             if(found) throw "Já existe usuário com esses parâmetros"
             let build = {
                 name: name,
+                cpf: cpfFormat(cpf),
                 gender: gender,
                 phone: phone,
                 birth: dateformat(birth),

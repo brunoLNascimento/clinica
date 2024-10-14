@@ -4,13 +4,13 @@ const { saveClientService, findClientService, findAllClientService, editClientSe
 module.exports = {
     async saveClient(req, res){
         try {
-            let { name, gender, phone, birth, height, weight } = req.body;
+            let { name, gender, phone, birth, height, weight, cpf } = req.body;
 
-            if( !name || !gender || !phone || !birth || !height || !weight){
+            if( !name || !gender || !phone || !birth || !height || !weight || !cpf){
                 throw { status: StatusCodes.BAD_REQUEST};;
             };
 
-            let resp = await saveClientService(name, gender, phone, birth, height, weight);
+            let resp = await saveClientService(name, gender, phone, birth, height, weight, cpf);
             return  res.status(200).send(resp);
         } catch (error) {
             console.log(error);

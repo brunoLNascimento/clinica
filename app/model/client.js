@@ -6,6 +6,7 @@ const client = sequelize.define(
   {
     clientid: { type: Sequelize.NUMBER, primaryKey: true, allowNull: false, autoIncrement: true },
     name: { type: Sequelize.STRING, length: 255, allowNull: false },
+    cpf: { type: Sequelize.STRING, length: 14, allowNull: false, unique: true },
     gender: { type: Sequelize.STRING, length: 1, allowNull: false },
     phone: { type: Sequelize.STRING, length: 14, allowNull: false },
     birth: { type: Sequelize.DATE, allowNull: false },
