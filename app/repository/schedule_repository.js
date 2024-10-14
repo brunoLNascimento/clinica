@@ -19,7 +19,7 @@ module.exports = {
 
     async findScheduleBy(where){
         try {
-            return await schedule().find(where)
+            return await schedule().findOne(where)
         } catch (error) {           
             throw error
         }

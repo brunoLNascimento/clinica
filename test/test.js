@@ -11,8 +11,7 @@ const editUser = {
     name: 'teste teste',
 };
 
-let { idUser, clienteId } = {};
-
+let { idUser, clienteId, scheduleId, idHistory } = {};
 
 const client = {
     "name":"cliente teste",
@@ -39,17 +38,19 @@ let saveSchedule = {
     "daySchedule": "01/01/2025",
     "timeSchedule": "14:35",
     "status": "Agendado"
-}
+};
 
-let realizado = { "status": "Realizado" };
-
+let realizado = { 
+    "daySchedule": "01/01/2025",
+    "timeSchedule": "14:35",
+    "status": "Realizado" 
+};
 
 describe( 'Testando api de afyaClinica', () => {
-    setTimeout( function () {
+    setTimeout( function () {        
         process.exit()
-      }, 4000);
+      }, 10000);
     
-      //inicio Validando rotas user
       it('#1 - Salvar usuario', done => {
         request(app)
         .post(`/user/`)
@@ -149,7 +150,11 @@ describe( 'Testando api de afyaClinica', () => {
         .post(`/clientHistory/`)
         .send(saveHistory)
         .timeout(3000)
-        .expect(200)
+        .expect(function(res){
+            if(res.status == 200){
+                idHistory = res._body.id;
+            }
+        })
         .end(done)
     })
 
@@ -174,20 +179,24 @@ describe( 'Testando api de afyaClinica', () => {
         .post(`/schedule/`)
         .send(saveSchedule)
         .timeout(3000)
-        .expect(200)
+        .expect(function(res){
+            if(res.status == 200){
+                scheduleId = res._body.id;
+            }
+        })
         .end(done)
     })
 
-    it('#14 - Mudar status da agenda do cliente', done => {
+    it('#15 - Mudar status da agenda do cliente', done => {
         request(app)
-        .put(`/schedule/`)
+        .put(`/schedule/${clienteId}`)
         .send(realizado)
         .timeout(3000)
         .expect(200)
         .end(done)
     })
 
-    it('#15 - Busca agenda do cliente', done => {
+    it('#16 - Busca agenda do cliente', done => {
         request(app)
         .get(`/findSchedule/${clienteId}`)
         .timeout(3000)
@@ -195,23 +204,23 @@ describe( 'Testando api de afyaClinica', () => {
         .end(done)
     }),
 
-    it('#16 - delete agenda do cliente', done => {
+    it('#17 - delete agenda do cliente', done => {
         request(app)
-        .delete(`/schedule/${clienteId}`)
+        .delete(`/schedule/${scheduleId}`)
         .timeout(3000)
         .expect(200)
         .end(done)
     })
 
-    it('#17 - delete historico do cliente', done => {
+    it('#18 - delete historico do cliente', done => {
         request(app)
-        .delete(`/clientHistory/${clienteId}`)
+        .delete(`/clientHistory/${idHistory}`)
         .timeout(3000)
         .expect(200)
         .end(done)
     })
 
-    it('#18 - delete cliente', done => {
+    it('#19 - delete cliente', done => {
         request(app)
         .delete(`/client/${clienteId}`)
         .timeout(3000)
@@ -219,7 +228,7 @@ describe( 'Testando api de afyaClinica', () => {
         .end(done)
     })
 
-    it('#19 - delete usuario', done => {
+    it('#20 - delete usuario', done => {
         request(app)
         .delete(`/user/${idUser}`)
         .timeout(3000)
