@@ -9,8 +9,8 @@ module.exports = {
                 throw { status: StatusCodes.BAD_REQUEST}
             };
 
-            let resp = await auth(login, password);
-            return  res.status(200).send(resp)
+            let resp = await auth(login, password);            
+            return res.status(200).send(resp)
         } catch (error) {
             console.log(error);
             return res.status(400).send(error.message || error);

@@ -10,7 +10,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.get('/client/:id', client.findClient,
+    server.get('/client/:id', authentication, client.findClient,
         /*
         #swagger.tags = ['Client']
         #swagger.summary = 'Consultar cliente por iD'
@@ -18,7 +18,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.get('/allClient/:pag', client.findAllClient,
+    server.get('/allClient/:pag', authentication, client.findAllClient,
         /*
         #swagger.tags = ['Client']
         #swagger.summary = 'Consultar todos os clientes'
@@ -26,7 +26,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.put('/client/:id', client.editClient,
+    server.put('/client/:id', authentication, client.editClient,
         /*
         #swagger.tags = ['Client']
         #swagger.summary = 'Editar cliente'
@@ -34,7 +34,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.delete('/client/:id', client.deleteClient,
+    server.delete('/client/:id', authentication, client.deleteClient,
         /*
         #swagger.tags = ['Client']
         #swagger.summary = 'Deleta cliente'

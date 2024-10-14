@@ -9,9 +9,8 @@ module.exports = {
     const pass = await bcrypt.encrypt(password, 10)
 
     if (user && bcrypt.compare(pass, user.password)) {
-      delete user.password;
-      user.token = makeToken(user);
-      return user;
+      let token = await makeToken(user);
+      return token;
     }
     throw 'Usuário não autenticado.';
   },

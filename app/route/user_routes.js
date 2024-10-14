@@ -1,7 +1,8 @@
 const user = require('../controller/user_controller.js')
+const authentication = require('../middleware/auth');
 
 module.exports = (server) => {
-    server.get('/user/:id', user.findUser, 
+    server.get('/user/:id', authentication, user.findUser, 
         /*
         #swagger.tags = ['User']
         #swagger.summary = 'Consulta usuario pelo id'
@@ -9,7 +10,7 @@ module.exports = (server) => {
         */ 
    );
 
-    server.get('/allUser/:pag', user.findAllUser,
+    server.get('/allUser/:pag', authentication, user.findAllUser,
         /*
         #swagger.tags = ['User']
         #swagger.summary = 'Consultar todos os usuarios'
@@ -25,7 +26,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.put('/user/:id', user.updateUser,
+    server.put('/user/:id', authentication, user.updateUser,
         /*
         #swagger.tags = ['User']
         #swagger.summary = 'Edita o usuario'
@@ -33,7 +34,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.delete('/user/:id', user.deletUser,
+    server.delete('/user/:id', authentication, user.deletUser,
         /*
         #swagger.tags = ['User']
         #swagger.summary = 'Deleta usuario'

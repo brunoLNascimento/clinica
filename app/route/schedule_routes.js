@@ -1,7 +1,8 @@
 const schedule = require('../controller/schedule_controller.js')
+const authentication = require('../middleware/auth');
 
 module.exports = (server) => {
-    server.post('/schedule/', schedule.saveSchedule,
+    server.post('/schedule/', authentication, schedule.saveSchedule,
         /*
         #swagger.tags = ['Schedule']
         #swagger.summary = 'Cadastro de agendamento'
@@ -9,7 +10,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.get('/findSchedule/:id', schedule.findSchedule,
+    server.get('/findSchedule/:id', authentication, schedule.findSchedule,
          /*
         #swagger.tags = ['Schedule']
         #swagger.summary = 'Consultar agendamento por iD'
@@ -17,7 +18,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.get('/allSchedule/:pag', schedule.findAllSchedule,
+    server.get('/allSchedule/:pag', authentication, schedule.findAllSchedule,
                 /*
         #swagger.tags = ['Schedule']
         #swagger.summary = 'Consultar todos os agendamentos'
@@ -25,7 +26,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.delete('/schedule/:id', schedule.deleteSchedule
+    server.delete('/schedule/:id', authentication, schedule.deleteSchedule
           /*
         #swagger.tags = ['Schedule']
         #swagger.summary = 'Deleta agendamento'
@@ -33,7 +34,7 @@ module.exports = (server) => {
         */ 
     );
     
-    server.put('/schedule/:id', schedule.editSchedule,
+    server.put('/schedule/:id', authentication, schedule.editSchedule,
           /*
         #swagger.tags = ['Schedule']
         #swagger.summary = 'Edita agendamento'

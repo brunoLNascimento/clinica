@@ -1,7 +1,8 @@
-const clientH = require('../controller/clientHistory_controller.js')
+const clientH = require('../controller/clientHistory_controller.js');
+const authentication = require('../middleware/auth');
 
 module.exports = (server) => {
-    server.post('/clientHistory/', clientH.saveClientH,
+    server.post('/clientHistory/', authentication, clientH.saveClientH,
         /*
         #swagger.tags = ['History']
         #swagger.summary = 'Cadastro de historico'
@@ -9,7 +10,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.get('/findOneHistory/:id', clientH.findOneHistory,
+    server.get('/findOneHistory/:id', authentication, clientH.findOneHistory,
         /*
         #swagger.tags = ['History']
         #swagger.summary = 'Consultar historico do  cliente por iD'
@@ -17,7 +18,7 @@ module.exports = (server) => {
         */ 
     );
 
-    server.get('/findAllHistory/:pag', clientH.findAllHistory,
+    server.get('/findAllHistory/:pag', authentication, clientH.findAllHistory,
         /*
         #swagger.tags = ['History']
         #swagger.summary = 'Consultar todos os historicos'
@@ -25,7 +26,7 @@ module.exports = (server) => {
         */
     );
 
-    server.delete('/clientHistory/:id', clientH.deleteHistory,
+    server.delete('/clientHistory/:id', authentication, clientH.deleteHistory,
         /*
         #swagger.tags = ['User']
         #swagger.summary = 'Deleta usuario'
