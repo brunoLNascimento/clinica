@@ -1,8 +1,8 @@
-# afyaClinica
+# clinicalinica
 
 ## Faça o clone
 ```bash
-$ git clone https://github.com/brunoLNascimento/afyaClinica.git 
+$ git clone https://github.com/brunoLNascimento/clinicalinica.git 
 ```
 
 **Banco de dados**

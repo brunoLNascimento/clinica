@@ -1,5 +1,5 @@
 {
-  "name": "afyaclinica",
+  "name": "clinicalinica",
   "version": "1.0.0",
   "description": "```sh\r $ docker-compose up\r ```",
   "main": "app.js",
