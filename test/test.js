@@ -54,7 +54,7 @@ let realizado = {
     "status": "Realizado" 
 };
 
-describe( 'Testando api de clinicalinica', () => {
+describe( 'Testando api de clinica', () => {
     setTimeout( function () {        
         process.exit()
       }, 10000);
